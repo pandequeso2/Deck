@@ -1,11 +1,16 @@
-const API_URL = 'https://db.ygoprodeck.com/api/v7/cardinfo.php'
+// Apuntamos al backend local (y luego a través de Docker)
+const API_URL = 'http://localhost:8080/api/v1/cards'
 
 export const fetchCards = async (params = {}) => {
   try {
-    const query = new URLSearchParams(params).toString()
-    const response = await fetch(`${API_URL}?${query}`)
+    // Si necesitas buscar por nombre usando tu backend
+    const url = params.name 
+      ? `${API_URL}/type/${params.name}` // O el endpoint que decidas para buscar
+      : API_URL;
+
+    const response = await fetch(url)
     const data = await response.json()
-    return data.data
+    return data // Tu backend devuelve la lista directamente, no un { data: [...] }
   } catch (error) {
     console.error('Error fetching cards:', error)
     return []

@@ -1,12 +1,15 @@
 function Card({ card }) {
+
+  const imageUrl = "https://images.ygoprodeck.com/images/cards/89631139.jpg"; // Placeholder genérico
+
   return (
     <div className="yugioh-card">
-      <img src={card.card_images[0].image_url_small} alt={card.name} />
+      <img src={imageUrl} alt={card.name} />
       <div className="card-info">
         <h3>{card.name}</h3>
-        <p>Tipo: {card.type}</p>
-        {card.atk !== undefined && <p>ATK: {card.atk} / DEF: {card.def}</p>}
-        <p className="card-desc">{card.desc.substring(0, 100)}...</p>
+        <p>Tipo: {card.cardType}</p>
+        {card.attack !== null && <p>ATK: {card.attack} / DEF: {card.defense}</p>}
+        <p className="card-desc">{card.description?.substring(0, 100)}...</p>
       </div>
     </div>
   )
